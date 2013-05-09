@@ -557,7 +557,7 @@ if ( ! -d "${tmp_dir}" || ! -d "${saved_dir}"
         start_html(-style=>{-code=>"<!--\n$CSS\n$CSS2\n-->\n\n"},
                    -title=>'drraw - '. $title),
         $header,
-        h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+        h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
         h3('Configuration problem!'),
         p("The directories ${tmp_dir} and ${saved_dir} MUST exist and be writable by the CGI user!"),
         $footer,
@@ -630,7 +630,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
         header,
         start_html(-style=>{-code=>$CSS}, -title=>'drraw - '. $title),
         $header,
-        h1({-class=>'title'}, a({-href=>&MakeURL}, $title));
+        h1({-class=>'title'}, a({-href=>&MakeURL()}, $title));
 
     # Browse=Help -> Display help page
     if ( defined(param('Browse')) && param('Browse') eq 'Help' ) {
@@ -1562,7 +1562,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                     start_html(-style=>{-code=>$CSS},
                                -title=>'drraw - '. $title),
                     $header,
-                    h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                    h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                     h1('Permission Denied!');
             } else {
                 unlink "${saved_dir}/d" . $1; # Untaint
@@ -1574,7 +1574,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                                                 &MakeURL('Browse',
                                                          'AllDashboards')})),
                     $header,
-                    h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                    h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                     h1('Board Deleted!');
                 Indexes_Save('d', $1, '');
             }
@@ -1583,7 +1583,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                 header,
                 start_html(-style=>{-code=>$CSS}, -title=>'drraw - '. $title),
                 $header,
-                h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                 &Error('Deletion failed.');
         }
     } else {
@@ -1591,7 +1591,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
             header,
             start_html(-style=>{-code=>$CSS}, -title=>'drraw - '. $title),
             $header,
-            h1({-class=>'title'}, a({-href=>&MakeURL}, $title));
+            h1({-class=>'title'}, a({-href=>&MakeURL()}, $title));
     }
 
     # New editing session based on an existing graph?
@@ -1729,7 +1729,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                     start_html(-style=>{-code=>$CSS},
                                -title=>'drraw - '. $title),
                     $header,
-                    h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                    h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                     h1('Permission Denied!');
             } else {
                 unlink "${saved_dir}/g" . $1; # Untaint
@@ -1741,7 +1741,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                                                 &MakeURL('Browse',
                                                          'AllGraphs')})),
                     $header,
-                    h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                    h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                     h1('Graph Deleted!');
                 Indexes_Save('g', $1, '');
             }
@@ -1755,7 +1755,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                     start_html(-style=>{-code=>$CSS},
                                -title=>'drraw - '. $title),
                     $header,
-                    h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                    h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                     h1('Permission Denied!');
             } else {
                 unlink "${saved_dir}/t" . $1;
@@ -1767,7 +1767,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                                                 &MakeURL('Browse',
                                                          'AllTemplates')})),
                     $header,
-                    h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                    h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
                     h1('Template Deleted!');
                 Indexes_Save('t', $1, '');
             }
@@ -1776,7 +1776,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                 header,
                 start_html(-style=>{-code=>$CSS}, -title=>'drraw - '. $title),
                 $header,
-                h1({-class=>'title'}, a({-href=>&MakeURL}, $title)),
+                h1({-class=>'title'}, a({-href=>&MakeURL()}, $title)),
             &Error('Deletion failed.');
         }
     } else {
@@ -1784,7 +1784,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
             header,
             start_html(-style=>{-code=>$CSS}, -title=>'drraw - '. $title),
             $header,
-            h1({-class=>'title'}, a({-href=>&MakeURL}, $title));
+            h1({-class=>'title'}, a({-href=>&MakeURL()}, $title));
     }
 
     # New editing session based on an existing graph?
