@@ -1460,7 +1460,8 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
                       ( defined(param('Width')) ) ? param('Width') : undef,
                       ( defined(param('Height')) ) ? param('Height') : undef,
                       ( defined(param('NoLegend')) ) ? param('NoLegend') : undef,
-                      ( defined(param('Format')) ) ? param('Format') : undef);
+                      ( defined(param('Format')) ) ? param('Format') : undef,
+                      ( defined(param('Title')) ) ? param('Title') : undef);
 
         &Definition_Load($graph[0]);
         unlink "${tmp_dir}/$1" if ( $graph[0] =~ /^(\d+\.\d+)$/ ); # Untaint
@@ -1475,6 +1476,7 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
         param(-name=>'gHeight', -value=>$graph[5]) if ( defined($graph[5]) );
         param(-name=>'gNoLegend', -value=>1) if ( defined($graph[6]) );
         param(-name=>'gFormat', -value=>$graph[7]) if ( defined($graph[7]) );
+        param(-name=>'Title', -value=>$graph[8]) if ( defined($graph[8]) );
         &DSLoad;
         &Cache_Load;
         &Sort_Colors_Init;
@@ -1515,8 +1517,13 @@ if ( scalar(@pnames) == 0 || defined(param('Browse')) ) {
 
             &TMPLFind(param('tRegex'), param('tNiceRegex'));
 
-            param(-name=>'gTitle', -value=>param('gTitle')
-                  .': '. $TMPL{param('Base')});
+            if (not length param('Title')) {
+                param(-name=>'gTitle', -value=>param('gTitle')
+                      .': '. $TMPL{param('Base')});
+            }
+            else {
+                param(-name=>'gTitle', -value=>param('Title'));
+            }
         }
         # Finally, produce the image
         &DRAW(( $graph[0] =~ /^\d/ ) ? 1 : 2);
@@ -4716,7 +4723,7 @@ sub help_urls
         h4('drraw URLs') .
         p('The URLs used by ', em('drraw'), ' to view defined graphs, templates and dashboards are fairly short, and as such, suitable for use in e-mail or other web pages.  The internal ID used to reference a graph, template or dashboard is generated upon creation (or cloning) and will remain the same for a given item.  It is interesting to note that the following options may be applied to actual graph (e.g. image) URLs to override settings saved:',
           ul(li('Start'), li('End'), li('Width'), li('Height'),
-             li('NoLegend'), li('Format')));
+             li('NoLegend'), li('Format'), li('Title')));
 }
 
 sub help_contact
